@@ -6,11 +6,13 @@ from django.shortcuts import render, HttpResponse
 
 def home(request):
 
-    return HttpResponse('Welcome Home')
+    return render(request,'base/home.html')
 
 
 
 
-def room(request):
+def room(request,pk):
 
-    return HttpResponse('Room 1')
+    context = {'id':pk}
+
+    return render(request,'base/room.html',context)
