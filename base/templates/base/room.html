@@ -1,17 +1,22 @@
 {% extends 'main.html'  %}
 
 
+<style>
 
+    h1 {
+        colour:red;
+    }
+</style>
 
 {% block content %}
 
 
 <h1>
 
-    WElcome to Room {{id}} template
+    WElcome to Room {{room.name}} template
 </h1>
 
-
+<h2> I am your host @{{room.host}}</h2>
 
 
 

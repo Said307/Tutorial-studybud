@@ -11,12 +11,50 @@
 
 {% block content %}
 
+<link rel="stylesheet" type="text/css" href="/static/base/css/sadiq.css" media=”screen” >
 
-<h1>
 
-    WElcome to Home template
-</h1>
 
+<div class="home-container">
+    <div>
+        <h3>Browse topics </h3>
+        <hr>
+    </div>
+
+
+
+
+    <div>
+       <a href="{% url 'create_room' %}"> Create a new room </a>
+    <div>
+
+    {%  for room in rooms %}
+    <div>
+
+
+
+        <span>@{{room.host}}</span>
+        <h5> <a href="{% url 'room' room.name %}"> {{room.name}} </a> </h5>
+        <small> {{room.topic.name}}</small>
+        <div> <small> created:{{room.created}} </small>
+        <small> upated:{{room.updated}} </small>
+        <br>
+        <br>
+           <a href="{% url 'update-room' room.name %}">Edit</a>
+        <a href="{% url 'delete-room' room.name %}">Delete</a>
+        </div>
+        <hr>
+
+    </div>
+
+    {%  endfor %}
+    </div>
+
+
+    </div>
+
+
+</div>
 
 
 

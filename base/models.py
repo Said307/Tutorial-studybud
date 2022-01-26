@@ -23,9 +23,13 @@ class Room(models.Model):
     topic = models.OneToOneField(Topic,on_delete=models.SET_NULL,null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True,blank=True)
-    updated = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     created =  models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+
+
+    class Meta:
+        ordering = ['-updated','-created']
 
     def __str__(self):
         return self.name
