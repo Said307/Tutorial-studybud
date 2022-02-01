@@ -1,11 +1,16 @@
 
-
-
-
-
-
-body {
-
-    background-color:yellow;
-
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
 }
+
+
+
+
+
+h1 {
+
+    background color:red;
+    color:green;
+}
+

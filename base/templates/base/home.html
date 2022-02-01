@@ -1,6 +1,6 @@
 {% extends 'base/base.html'  %}
 
-
+{% load static %}
 
 
 
@@ -12,6 +12,7 @@
 {% block content %}
 
 
+<link  type="text/css" href="{% static 'css/sadiq.css'%}" rel="stylesheet"  >
 
 
 <div class="home-container">
@@ -41,12 +42,13 @@
         <br>
            <a href="{% url 'update-room' room.name %}">Edit</a>
         <a href="{% url 'delete-room' room.name %}">Delete</a>
+          <hr>
         </div>
-        <hr>
 
+        {%  endfor %}
     </div>
 
-    {%  endfor %}
+   </div>
     </div>
 
 
@@ -58,4 +60,4 @@
 
 
 
-{% endblock%}
+{% endblock  %}
