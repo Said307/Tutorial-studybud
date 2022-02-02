@@ -12,6 +12,7 @@
 {% block content %}
 
 
+
 <link  type="text/css" href="{% static 'css/sadiq.css'%}" rel="stylesheet"  >
 
 
@@ -19,6 +20,14 @@
     <div>
         <h3>Browse topics </h3>
         <hr>
+        <div>
+            <a href="{% url 'home' %}">All topics </a>
+        </div>
+        {% for topic in topics %}
+        <div>
+           <a href="{% url 'home'%}?q={{topic.name}}"> {{topic.name}}</a>
+        </div>
+        {% endfor %}
     </div>
 
 
