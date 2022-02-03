@@ -1,16 +1,41 @@
 
+
+
+
 .home-container {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
 }
 
 
+.sidebar {
+    background-color:#f7f7f7;
+}
+
+
+.navbar {
+    background-color:#cfd3d4;
+
+}
+
+
+.room {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;}
+
 
 
 
 h1 {
 
-    background color:red;
+
     color:green;
 }
 
+hr {
+
+
+    color:blue;
+}

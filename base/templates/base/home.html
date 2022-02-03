@@ -17,7 +17,7 @@
 
 
 <div class="home-container">
-    <div>
+    <div class="sidebar">
         <h3>Browse topics </h3>
         <hr>
         <div>
@@ -34,11 +34,12 @@
 
 
     <div>
-       <a href="{% url 'create_room' %}"> Create a new room </a>
+
+       <small>Total {{room_count}} rooms found </small> <br><br>
     <div>
 
     {%  for room in rooms %}
-    <div>
+    <div  >
 
 
 
@@ -54,7 +55,11 @@
           <hr>
         </div>
 
+
+
+    <div>
         {%  endfor %}
+        <a href="{% url 'create_room' %}"> Create a new room </a> <br><br>
     </div>
 
    </div>
