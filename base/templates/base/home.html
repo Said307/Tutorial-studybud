@@ -50,8 +50,10 @@
         <small> upated:{{room.updated}} </small>
         <br>
         <br>
+        {% if user == room.host%}
            <a href="{% url 'update-room' room.name %}">Edit</a>
         <a href="{% url 'delete-room' room.name %}">Delete</a>
+        {% endif %}
           <hr>
         </div>
 

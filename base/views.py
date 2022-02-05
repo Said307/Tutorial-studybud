@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponse,redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from . models import *
 from . forms import *
@@ -38,7 +40,7 @@ def room(request,url2):
 
     return render(request,'base/room.html',context)
 
-
+@login_required(login_url='/login')    # redirecting to unauthorized users login page
 def create_room(request):
 
     form = RoomForm()
@@ -57,6 +59,8 @@ def create_room(request):
 def update_room(request,url2):
     room = Room.objects.get(name=url2)
     form = RoomForm(instance=room)
+    if request.user != room.host:
+        return redirect('login')
     if request.method == 'POST':
         form = RoomForm(request.POST,instance=room)
         if form.is_valid():
@@ -70,6 +74,8 @@ def update_room(request,url2):
 
 def delete_room(request,url2):
     room = Room.objects.get(name=url2)
+    if request.user != room.host:
+        return redirect('login')
     if request.method == 'POST':
         room.delete()
         return redirect('home')
@@ -77,21 +83,44 @@ def delete_room(request,url2):
     return render(request,'base/delete.html',context)
 
 
+
+
+
+
 #==============User login system=================
 
 def register(request):
+    #step 1 capture new user details
+    page = 'register'
 
-    context = {}
-    return render(request,'base/register.html',context)
+    form = UserCreationForm()
+    #step 2 save user details on the User database tabel
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)  # fill the form with POST data
+        if form.is_valid():
+            user = form.save(commit=False)       # don't save it in database yet
+            user.username =user.username.lower()
+            user.save()   # Now, save it on the database
+            login(request,user)                  # login the new user straight away
+            return redirect('home')
+        else:
+            messages.error(request,'Registration error')
+
+    context = {'page':page,'form':form}
+    return render(request,'base/login_register.html',context)
 
 
 def login_page(request):
+    """ This view can show login OR register template"""
 
+    page  = 'login'
     """ manual process instad of using modelform """
-
+    #step 1a check if user is already logged in
+    if request.user.is_authenticated:
+        return redirect('home')
     # step 1, check if user is in database
     if request.method == 'POST':
-        username  = request.POST.get('username')
+        username  = request.POST.get('username').lower()
         password  = request.POST.get('password')
         try:
             user = User.objects.get(username=username)
@@ -105,8 +134,9 @@ def login_page(request):
             return redirect('home')
         else:
             messages.error(request,'Incorrect password')
-    context = {}
-    return render(request,'base/login.html',context)
+    context = {'page':page}
+    return render(request,'base/login_register.html',context)
+
 
 
 def logout_page(request):
