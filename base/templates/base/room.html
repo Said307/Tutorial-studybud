@@ -1,17 +1,75 @@
 {% extends 'base/base.html'  %}
-
+{% load static %}
 
 
 {% block content %}
 
-
-<h1>
-
-    WElcome to Room {{room.name}} template
-</h1>
-
-<h2> I am your host @{{room.host}}</h2>
+<link  type="text/css" href="{% static 'css/sadiq.css'%}" rel="stylesheet"  >
 
 
 
-{% endblock%}
+
+
+
+<div class="room-container">
+
+
+    <div class="messages-container">
+<h1>{{room.name}}</h1>   @{{room.host}}
+
+<p> {{room.description}}</p>
+<br><br>
+
+
+<div class="comment-wrapper">
+    <h5> Conversation </h5>
+    <hr>
+</div>
+
+{% for message in text %}
+
+<div>
+  <small> by {{message.user}}  {{message.created|timesince}} ago </small>
+  <p> {{message.body}} </p>
+  <hr>
+</div>
+{% endfor%}
+
+{% if user.is_authenticated %}
+<div class="comment-form">
+    <form action="" method="POST">
+        {% csrf_token%}
+        <input type="text" name="body" placeholder="write your message here">
+
+
+    </form>
+  </div>
+</div>
+
+
+
+
+<div class="participants-container">
+<h3>Participants</h3>
+<hr>
+{% for user in participants %}
+<div></div>
+<p> @{{user.username}}</p>
+</div>
+
+{%endfor%}
+</div>
+
+
+
+
+
+ {% endif%}
+</div>
+
+
+
+
+
+
+{% endblock  %}

@@ -12,23 +12,24 @@ from . forms import *
 
 
 def home(request):
-
+    # Home isplays filtered  database objects.
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     # | pipe means OR
     rooms = Room.objects.filter(
         Q(topic__name__icontains=q)|
-        Q(name__icontains=q)|
-        Q(message__body__icontains=q)  # table name __ fieldname
+        Q(name__icontains=q)
+          # table name __ fieldname
 
     )
 
 
     topics = Topic.objects.all()
     room_count = rooms.count()
-    context = {'topics':topics,'rooms':rooms}
+    context = {'topics':topics,'rooms':rooms,'room_count':room_count}
 
     return render(request,'base/home.html',context)
+
 
 
 
@@ -36,9 +37,24 @@ def home(request):
 def room(request,url2):
 
     room = Room.objects.get(name=url2)
-    context = {'room':room}
+    participants = room.participants.all()
+    text = room.message_set.all().order_by('-created')
+    # create a new message
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user = request.user,
+            body = request.POST.get('body'),
+            room = room
+            )
+        redirect('room',url2=room.name)
 
+
+    context = {'room':room,'text':text,'participants':participants}
     return render(request,'base/room.html',context)
+
+
+
+#======================ROOM CRUD ===================================
 
 @login_required(login_url='/login')    # redirecting to unauthorized users login page
 def create_room(request):
@@ -84,10 +100,7 @@ def delete_room(request,url2):
 
 
 
-
-
-
-#==============User login system=================
+#==============User login system=====================
 
 def register(request):
     #step 1 capture new user details

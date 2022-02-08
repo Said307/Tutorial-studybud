@@ -16,3 +16,9 @@ class RoomForm(ModelForm):
         model = Room     # Table name
         fields = '__all__'
 
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = '__all__'
+

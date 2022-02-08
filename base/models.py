@@ -16,13 +16,14 @@ class Topic(models.Model):
 
 
 
-
 class Room(models.Model):
-
-    host = models.OneToOneField(User,on_delete=models.SET_NULL,null=True)
-    topic = models.OneToOneField(Topic,on_delete=models.SET_NULL,null=True)
+    # One User can have many rooms   1toM relationship
+    host = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    #one topic can be in many rooms
+    topic = models.ForeignKey(Topic,on_delete=models.SET_NULL,null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True,blank=True)
+    participants = models.ManyToManyField(User,related_name='Participants',blank=True)
     updated = models.DateTimeField(auto_now=True)
     created =  models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)

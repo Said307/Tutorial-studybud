@@ -8,6 +8,13 @@
 }
 
 
+.room-container {
+    display: grid;
+    grid-template-columns:  3fr 1fr;
+}
+
+
+
 .sidebar {
     background-color:#f7f7f7;
 }
