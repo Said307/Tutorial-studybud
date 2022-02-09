@@ -26,8 +26,8 @@ def home(request):
 
     topics = Topic.objects.all()
     room_count = rooms.count()
-    context = {'topics':topics,'rooms':rooms,'room_count':room_count}
-
+    room_messages = Message.objects.all()
+    context = {'topics':topics,'rooms':rooms,'room_count':room_count,'room_messages':room_messages}
     return render(request,'base/home.html',context)
 
 
@@ -38,7 +38,7 @@ def room(request,url2):
 
     room = Room.objects.get(name=url2)
     participants = room.participants.all()
-    text = room.message_set.all().order_by('-created')
+    room_messages = room.message_set.all()
     # create a new message
     if request.method == 'POST':
         message = Message.objects.create(
@@ -46,10 +46,12 @@ def room(request,url2):
             body = request.POST.get('body'),
             room = room
             )
+        #When a user enters this room add his name to the room.participants list
+        room.participants.add(request.user)
         redirect('room',url2=room.name)
 
 
-    context = {'room':room,'text':text,'participants':participants}
+    context = {'room':room,'room_messages':messages,'participants':participants}
     return render(request,'base/room.html',context)
 
 
@@ -63,7 +65,9 @@ def create_room(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj=form.save(commit=False)
+            obj.host =request.user
+            obj.save()
             return redirect('home')
 
     context = {'form':form}
@@ -95,7 +99,7 @@ def delete_room(request,url2):
     if request.method == 'POST':
         room.delete()
         return redirect('home')
-    context = {'room':room}
+    context = {'obj':room}
     return render(request,'base/delete.html',context)
 
 
@@ -160,6 +164,17 @@ def logout_page(request):
 
 
 
+#======================message CRUD=================================
+
+def delete_message(request,pk):
+    message = Message.objects.get(id=pk)
+    if request.user != message.user:
+        return HttpResponse('No permission')
+    if request.method == 'POST':
+        message.delete()
+        return redirect('home')
+    context = {'obj':message}
+    return render(request,'base/delete.html',context)
 
 
 

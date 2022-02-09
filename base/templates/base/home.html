@@ -15,8 +15,10 @@
 
 <link  type="text/css" href="{% static 'css/sadiq.css'%}" rel="stylesheet"  >
 
-
 <div class="home-container">
+
+
+
     <div class="sidebar">
         <h3>Browse topics </h3>
         <hr>
@@ -33,10 +35,21 @@
 
 
 
+
+
+
+
+
+
+
+
+<div>
+
     <div>
 
-       <small>Total {{room_count}} rooms found </small> <br><br>
-    <div>
+       <span><small>Total {{room_count}} rooms found </small> </span>
+       <a href="{% url 'create_room' %}"> Create a new room </a><br><br>
+    </div>
 
     {%  for room in rooms %}
     <div  >
@@ -44,31 +57,46 @@
 
 
         <span>@{{room.host}}</span>
-        <h5> <a href="{% url 'room' room.name %}"> {{room.name}} </a> </h5>
-        <small> {{room.topic.name}}</small>
-        <div> <small> created:{{room.created}} </small>
-        <small> upated:{{room.updated}} </small>
-        <br>
-        <br>
         {% if user == room.host%}
            <a href="{% url 'update-room' room.name %}">Edit</a>
         <a href="{% url 'delete-room' room.name %}">Delete</a>
         {% endif %}
+        <h5> <a href="{% url 'room' room.name %}"> {{room.name}} </a> </h5>
+        <small> {{room.topic.name}}</small>
+        <small> created:{{room.created}} </small>
+        <small> upated:{{room.updated}} </small>
+        <br>
+        <br>
+
           <hr>
-        </div>
+    </div>
 
-
-
-    <div>
         {%  endfor %}
-        <a href="{% url 'create_room' %}"> Create a new room </a> <br><br>
-    </div>
 
-   </div>
-    </div>
 
 
     </div>
+
+
+
+
+
+
+<div class="activity-feed">
+
+<h3>Recent activity</h3>
+<hr>
+{% for message in room_messages %}
+<p>@{{message.user}} {{message.created|timesince}} ago </p>
+
+{% endfor %}
+</div>
+
+
+
+
+
+
 
 
 </div>

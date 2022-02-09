@@ -25,9 +25,13 @@
 <div class="comment-wrapper">
     <h5> Conversation </h5>
     <hr>
-{% for message in text %}
+{% for message in room_messages %}
+
 
 <div>
+    {%  if request.user == message.user %}
+    <a href="{% url 'delete-message' message.id %}">Delete</a>
+    {% endif %}
   <small> by {{message.user}}  {{message.created|timesince}} ago </small>
   <p> {{message.body}} </p>
   <hr>

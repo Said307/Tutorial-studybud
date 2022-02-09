@@ -14,11 +14,5 @@ class RoomForm(ModelForm):
 
     class Meta :
         model = Room     # Table name
-        fields = '__all__'
-
-
-class MessageForm(ModelForm):
-    class Meta:
-        model = Message
-        fields = '__all__'
+        exclude = ['participants','host']
 
