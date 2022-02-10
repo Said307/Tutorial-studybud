@@ -8,8 +8,7 @@
 }
 
 .room-container {
-    display: grid;
-    grid-template-columns:   3fr 1fr ;
+    background-color: white;
 }
 
 
@@ -18,10 +17,19 @@
 }
 
 
-.navbar {
-    background-color:#cfd3d4;
+
+.activity-feed {
+    background-color:#f7f7f7;
+}
+
+
+
+.nav-bar {
+    background-color:red;
 
 }
+
+
 
 
 .room {

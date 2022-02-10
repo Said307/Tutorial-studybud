@@ -16,30 +16,24 @@
 
 
 
-
-<a href="/">  <h1> CodingTeam</h1></a>
-
-
-    </head>
-
-
-
-    <body>
-
-
-<!--     Search  functions   -->
-<form action="{% url 'home' %}" method='GET'>
-    <input type='text' name="q"  placeholder="Search Rooms..."/>
-    <button type="submit"> Search </button>
-</form>
+<div class="navbar navbar-dark bg-primary">
 
 
 {% if user.is_authenticated %}
-  <small style="color:red"> Welcome, {{user}}</small>
+  <small style="color:white"> Welcome, {{user}}</small>
   <a href="{% url 'logout' %}">Logout </a>
 {% else %}
     <a href="{% url 'login' %}">Login </a>
 {% endif%}
+
+
+<a href="/">  <h1 style= color:white;> CodingTeam</h1></a>
+
+ <!--     Search  functions   -->
+ <form action="{% url 'home' %}" method='GET'>
+    <input type='text' name="q"  placeholder="Search Rooms..."/>
+    <button type="submit"> Search </button>
+</form>
 
 
 <hr>
@@ -52,6 +46,18 @@
     {% endfor %}
 </ul>
 {% endif %}
+
+</div>
+
+    </head>
+
+
+
+    <body>
+
+
+
+
 
 
 
