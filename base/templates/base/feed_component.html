@@ -8,7 +8,7 @@
 
 
 
-        <span>@{{room.host}}</span>
+        <a href="{% url 'profile' room.host%}" >@{{room.host}}</a>
         {% if user == room.host%}
            <a href="{% url 'update-room' room.name %}">Edit</a>
         <a href="{% url 'delete-room' room.name %}">Delete</a>

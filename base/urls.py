@@ -18,6 +18,8 @@ urlpatterns= [
 
    path('delete_message/<str:pk>',views.delete_message,name="delete-message"),
 
+   path('profile/<str:name>',views.profile,name="profile")
+
 
 
     ]

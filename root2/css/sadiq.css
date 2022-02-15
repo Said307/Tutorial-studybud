@@ -7,8 +7,17 @@
     grid-template-columns: 1fr 3fr 1fr;
 }
 
+.profile-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+
+
 .room-container {
     background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 
 
@@ -31,12 +40,6 @@
 
 
 
-
-.room {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  margin-right: 150px;
-  margin-left: 80px;}
 
 
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse,redirect
+from django.shortcuts import render, HttpResponse,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
@@ -182,7 +182,17 @@ def delete_message(request,pk):
 
 
 
+#======================User Profile=================================
 
+
+def profile(request,name):
+
+    user =  get_object_or_404(User,username=name)
+    rooms = user.room_set.all()
+    room_messages = user.message_set.all()
+    topics = Topic.objects.all()
+    context = {'user':user,'rooms':rooms,'topics':topics,'room_messages':room_messages}
+    return render(request,'base/profile.html',context)
 
 
 
