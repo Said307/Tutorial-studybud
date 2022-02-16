@@ -16,7 +16,7 @@
         <h5> <a href="{% url 'room' room.name %}"> {{room.name}} </a> </h5>
         <small> {{room.topic.name}}</small>
         <small> created:{{room.created}} </small>
-        <small> upated:{{room.updated}} </small>
+        <small> updated:{{room.updated}} </small>
         <br>
         <br>
 
@@ -24,3 +24,26 @@
     </div>
 
         {%  endfor %}
+
+  <!--Pagination-->
+      <div class="container p-4">
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+              {% if movies.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ movies.previous_page_number }}">previous</a>
+              {% endif %}
+
+                <span class="current">
+                    Page {{ movies.number }} of {{ movies.paginator.num_pages }}
+                </span>
+
+              {% if movies.has_next %}
+                  <a href="?page={{ movies.next_page_number }}">next</a>
+                  <a href="?page={{ movies.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+            </span>
+            </div>
+        </div>
+      <!--end of Pagination-->
+

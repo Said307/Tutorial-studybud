@@ -122,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Add these new lines
+# Add these new lines,  static files can be stored in multiple  folders
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'staticfiles'),
 )

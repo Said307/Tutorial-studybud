@@ -5,6 +5,7 @@
 .home-container {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
+
 }
 
 .profile-container {
@@ -22,7 +23,8 @@
 
 
 .sidebar {
-    background-color:#f7f7f7;
+
+    background-image: #f7f7f7;
 }
 
 
@@ -32,11 +34,6 @@
 }
 
 
-
-.nav-bar {
-    background-color:red;
-
-}
 
 
 

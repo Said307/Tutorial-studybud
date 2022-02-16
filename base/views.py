@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from . models import *
 from . forms import *
-# Create your views here.
+# pagination
+from django.core.paginator import Paginator
 
 
 
@@ -16,14 +17,14 @@ def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     # | pipe means OR
-    rooms = Room.objects.filter(
+    """rooms = Room.objects.filter(
         Q(topic__name__icontains=q)|
         Q(name__icontains=q)
           # table name __ fieldname
 
-    )
+    )"""
 
-
+    rooms = Room.objects.all()
     topics = Topic.objects.all()
     room_count = rooms.count()
     room_messages = Message.objects.filter(
@@ -31,7 +32,12 @@ def home(request):
 
 
     )[:6]
-    context = {'topics':topics,'rooms':rooms,'room_count':room_count,'room_messages':room_messages}
+
+    #Set up pagination
+    paginator = Paginator(rooms, 5)
+    page_number  = request.GET.get('page',1)
+    page_obj = paginator.page(page_number)
+    context = {'topics':topics,'rooms':rooms,'room_count':room_count,'room_messages':room_messages,'movies':page_obj}
     return render(request,'base/home.html',context)
 
 

@@ -21,7 +21,7 @@
 <hr>
 {% for user in participants %}
 
-<p> @{{user.username}}</p>
+<p> <a href="{% url 'profile' user.username %}"> @{{user.username}}</p></a>
 
 
 
@@ -47,7 +47,7 @@
 
 
 <div class="messages-container">
-        <h1>{{room.name}}</h1>   @{{room.host}}
+        <h1>{{room.name}}</h1>   <a href="{% url 'profile' user.username %}">@{{room.host}}</a>
 
         <p> {{room.description}}</p>
         <br><br>
