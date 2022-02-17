@@ -1,0 +1,69 @@
+{% extends 'base/base.html'  %}
+
+{% load static %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+
+
+
+<div class="home-container">
+
+
+
+    <div class="sidebar">
+      {% include 'base/topics_component.html'%}
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="roomfeed-container">
+   <div>
+
+       <span><small>Total {{room_count}} rooms found </small> </span>
+       <a href="{% url 'create_room' %}"> Create a new room </a><br><br>
+    </div>
+
+{% include 'base/feed_component.html'%}
+
+</div>
+
+
+
+
+
+
+<div class="activity-feed">
+
+{% include 'base/activity_component.html'%}
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock  %}
