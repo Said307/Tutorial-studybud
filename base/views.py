@@ -26,7 +26,7 @@ def home(request):
 
     rooms = Room.objects.all()
     topics = Topic.objects.all()
-    room_count = rooms.count()
+
     room_messages = Message.objects.filter(
         Q(room__topic__name__icontains=q) #if the room's topic's name conatains q
 
