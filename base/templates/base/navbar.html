@@ -30,7 +30,7 @@
           {% if user.is_authenticated %}
 
           <div class="header__user">
-            <a href="profile.html">
+            <a href="{% url 'profile' user.username %}">
               <div class="avatar avatar--medium active">
                 <img src="https://randomuser.me/api/portraits/men/37.jpg" />
               </div>

@@ -37,7 +37,7 @@ def home(request):
     paginator = Paginator(rooms, 5)
     page_number  = request.GET.get('page',1)
     page_obj = paginator.page(page_number)
-    context = {'topics':topics,'rooms':rooms,'room_count':room_count,'room_messages':room_messages,'movies':page_obj}
+    context = {'topics':topics,'rooms':rooms,'room_messages':room_messages,'movies':page_obj}
     return render(request,'base/home.html',context)
 
 
