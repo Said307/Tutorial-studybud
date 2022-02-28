@@ -1,0 +1,121 @@
+{% extends 'base/base.html'  %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+
+
+
+<div class="room-container">
+
+
+
+<div class="section 1">
+
+
+<div class="participants-container">
+<h3>Participants</h3>
+<hr>
+{% for user in participants %}
+
+<p> <a href="{% url 'profile' user.username %}"> @{{user.username}}</p></a>
+
+
+
+{%endfor%}
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="section 2 ">
+
+
+
+
+<div class="messages-container">
+        <h1>{{room.name}}</h1>   <a href="{% url 'profile' room.host %}">@{{room.host}}</a>
+
+        <p> {{room.description}}</p>
+        <br><br>
+
+
+
+        <div class="comment-wrapper">
+            <h5> Conversation </h5>
+            <hr>
+        {% for msg in room_messages %}
+
+
+                    <div>
+                        {%  if request.user == msg.user %}
+                        <a href="{% url 'delete-message' msg.id %}">Delete</a>
+                        {% endif %}
+                      <small> by {{msg.user}}  {{msg.created|timesince}} ago </small>
+                      <p> {{msg.body}} </p>
+                      <hr>
+                    </div>
+        {% endfor%}
+        </div>
+</div>
+
+
+
+
+
+
+
+
+{% if user.is_authenticated %}
+<div class="comment-form">
+    <form action="" method="POST">
+        {% csrf_token%}
+        <input type="text" name="body" placeholder="write your message here">
+
+
+    </form>
+
+  </div>
+   {% endif %}
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock  %}

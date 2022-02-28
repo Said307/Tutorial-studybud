@@ -82,7 +82,7 @@ def create_room(request):
 
     context = {'form':form}
 
-    return render(request,'base/room_form.html',context)
+    return render(request,'base/room-form.html',context)
 
 
 
@@ -97,7 +97,7 @@ def update_room(request,url2):
             form.save()
             return redirect('home')
     context = {'form':form,'room':room}
-    return render(request,'base/room_form.html',context)
+    return render(request,'base/room-form.html',context)
 
 
 

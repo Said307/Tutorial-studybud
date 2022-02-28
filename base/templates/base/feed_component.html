@@ -12,13 +12,16 @@
               </a>
               <div class="roomListRoom__actions">
                 <span>{{room.created|timesince}} ago </span>
+
+
+
+
               </div>
             </div>
             <div class="roomListRoom__content">
               <a href="{% url 'room' room.name %}">{{room.name}}</a>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ducimus harum dolorem, obcaecati
-                mollitia omnis quasi aut consequuntur enim itaque labore.
+                {{room.description}}
               </p>
             </div>
             <div class="roomListRoom__meta">
