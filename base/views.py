@@ -17,14 +17,14 @@ def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     # | pipe means OR
-    """rooms = Room.objects.filter(
+    rooms = Room.objects.filter(
         Q(topic__name__icontains=q)|
         Q(name__icontains=q)
           # table name __ fieldname
 
-    )"""
+    )
 
-    rooms = Room.objects.all()
+
     topics = Topic.objects.all()
 
     room_messages = Message.objects.filter(
@@ -85,7 +85,7 @@ def create_room(request):
     return render(request,'base/room-form.html',context)
 
 
-
+@login_required(login_url='/login')
 def update_room(request,url2):
     room = Room.objects.get(name=url2)
     form = RoomForm(instance=room)
@@ -101,7 +101,7 @@ def update_room(request,url2):
 
 
 
-
+@login_required(login_url='/login')
 def delete_room(request,url2):
     room = Room.objects.get(name=url2)
     if request.user != room.host:
@@ -176,6 +176,7 @@ def logout_page(request):
 
 #======================message CRUD=================================
 
+@login_required(login_url='/login')
 def delete_message(request,pk):
     message = Message.objects.get(id=pk)
     if request.user != message.user:
@@ -201,4 +202,14 @@ def profile(request,name):
     return render(request,'base/profile.html',context)
 
 
+def update_profile(request,name):
+    user = request.user
+    form = ProfileForm(instance=user)
+    if request.method == 'POST':
+        form  = ProfileForm(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile',name=user.username)
 
+    context= {'form':form}
+    return render(request,'base/update-user.html',context)

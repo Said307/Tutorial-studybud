@@ -18,7 +18,8 @@ urlpatterns= [
 
    path('delete_message/<str:pk>',views.delete_message,name="delete-message"),
 
-   path('profile/<str:name>',views.profile,name="profile")
+   path('profile/<str:name>',views.profile,name="profile"),
+   path('profile/<str:name>/update/',views.update_profile,name="update-profile")
 
 
 
