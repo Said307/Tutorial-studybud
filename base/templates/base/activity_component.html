@@ -10,7 +10,7 @@
             <div class="activities__boxHeader roomListRoom__header">
               <a href="{% url 'profile' msg.user.username %}" class="roomListRoom__author">
                 <div class="avatar avatar--small">
-                  <img src="https://randomuser.me/api/portraits/women/11.jpg" />
+                  <img src="{{msg.user.avatar.url}}" />
                 </div>
                 <p>
                   {{msg.user}}

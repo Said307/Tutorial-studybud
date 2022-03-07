@@ -128,10 +128,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL= '/images/'
+
+
 # Add these new lines,  static files can be stored in multiple  folders
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'staticfiles'),
 )
+
+
+MEDIA_ROOT = BASE_DIR/'staticfiles/images'
+
+
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'root2')
 

@@ -125,10 +125,10 @@ def register(request):
     #step 1 capture new user details
     page = 'register'
 
-    form = ProfileForm()
+    form = MyUserCreationForm()
     #step 2 save user details on the User database tabel
     if request.method == 'POST':
-        form = ProfileForm(request.POST)  # fill the form with POST data
+        form = MyUserCreationForm(request.POST,request.FILES)  # fill the form with POST data
         if form.is_valid():
             user = form.save(commit=False)       # don't save it in database yet
             user.username =user.username.lower()
@@ -209,9 +209,9 @@ def profile(request,name):
 
 def update_profile(request,name):
     user = request.user
-    form = ProfileForm(instance=user)
+    form = ProfileUpdateForm(instance=user)
     if request.method == 'POST':
-        form  = ProfileForm(request.POST,instance=user)
+        form  = ProfileUpdateForm(request.POST,request.FILES , instance=user)
         if form.is_valid():
             form.save()
             return redirect('profile',name=user.username)

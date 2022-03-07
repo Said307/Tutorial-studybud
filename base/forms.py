@@ -1,6 +1,6 @@
 
 
-
+from django.contrib.auth.forms import UserCreationForm
 
 from django.forms import ModelForm
 
@@ -19,10 +19,16 @@ class RoomForm(ModelForm):
 
 
 
+class MyUserCreationForm(UserCreationForm): # registration for has different parent than update form
+    class Meta:
+        model= get_user_model()
+        fields = ['name','username','email','password1','password2']
 
 
-class ProfileForm(ModelForm):
+
+
+class ProfileUpdateForm(ModelForm):
 
     class Meta :
         model =  get_user_model()
-        fields = ['username','email','password','bio']
+        fields = ['username','email','avatar','bio']
