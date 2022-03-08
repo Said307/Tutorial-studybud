@@ -9,7 +9,7 @@ import uuid
 
 
 class User(AbstractUser):
-
+    username = models.CharField(max_length=200, null=False)
     name = models.CharField(max_length=200, null=False)
     email = models.EmailField(unique=True, null=False)
     bio = models.TextField(null=True)
