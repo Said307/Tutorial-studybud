@@ -12,7 +12,7 @@ For further learning, I replaced the default sqlite database with a locally inst
 * Getting familiar with running Apache2 webserver on Ubuntu.
 * Basic introduction to PostgreSQL database.
 * I learned basic app deployment, inclduing:
-- Apache VirtualHost configuration
+⋅⋅1. Apache VirtualHost configuration
 - WSGI server (mod_wsgi)
 - UFW and permissions configuration an Apache2
 - How manage Enviroment Variables
