@@ -15,4 +15,4 @@ For further learning, I replaced the default sqlite database with a locally inst
 1. Apache VirtualHost configuration
 2. WSGI server (mod_wsgi)
 3. UFW and permissions configuration an Apache2
-4. Enviroment Variables
+4. Enviroment Variables.
