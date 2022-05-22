@@ -1,16 +1,11 @@
-
 from rest_framework.serializers import ModelSerializer
 
 
-from .. models import *
-
-
-
+from ..models import *
 
 
 class RoomSerializer(ModelSerializer):
-
     class Meta:
 
-        model =  Room
-        fields = '__all__'
+        model = Room
+        fields = "__all__"
